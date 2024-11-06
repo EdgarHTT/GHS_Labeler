@@ -8,12 +8,12 @@ import DisplayBar from './DisplayBar/DisplayBar';
 
 function App() {
   return (
-    <Container>
+    <Container fluid="xxl">
       <Row>
-        <Col sm={5}>
+        <Col md={5} className="CommandBar">
           <CommandBar />
         </Col>
-        <Col sm={6}>
+        <Col md={7}>
           <DisplayBar />
         </Col>
       </Row>

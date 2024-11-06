@@ -1,9 +1,7 @@
 .App {
   text-align: center;
-  color: blue;
 }
 
-CommandBar {
-  color: #0b132b;
-  font-size: small;
+.CommandBar {
+  background-color: #0B132B;
 }
