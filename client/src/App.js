@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import './App.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import CommandBar from './CommandBar/CommandBar';
+import DisplayBar from './DisplayBar/DisplayBar';
 
 function App() {
-  
-  const [data, setData] = useState([{}])
-
-  useEffect(() => {
-    fetch("/members").then(
-        res => res.json()
-      ).then(
-        data => {
-          setData(data) 
-          console.log(data)
-      }
-    )
-  }, [])
-  
   return (
-    <div>
-
-      {(typeof data.members === 'undefined') ? (
-        <p>Loading...</p>
-      ): (
-        data.members.map((member, i) => (
-          <p key={i}>{member}</p>
-        ))
-      )}
-    </div>
+    <Container>
+      <Row>
+        <Col sm={5}>
+          <CommandBar />
+        </Col>
+        <Col sm={6}>
+          <DisplayBar />
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
