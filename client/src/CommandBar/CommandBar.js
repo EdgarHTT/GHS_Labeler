@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SearchBar from './SearchBar/SearchBar'
 import GenerateButton from './GenerateButton/GenerateButton'
+import { fetchCompound } from './serverConnection/fetchHandler.js'
 
 function CommandBar() {
     // State to store the search query
@@ -13,8 +14,9 @@ function CommandBar() {
     };
 
     // Handle the submission of the form
-    const handleSubmit = () => {
-        alert(JSON.stringify({query}));
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        fetchCompound(query);
         //TODO: I'll send the query to the backend perform the generation
     }
     return (
