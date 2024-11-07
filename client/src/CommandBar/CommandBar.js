@@ -1,8 +1,13 @@
 import React from 'react'
+import SearchBar from './SearchBar/SearchBar'
+import GenerateButton from './GenerateButton/GenerateButton'
 
 function CommandBar() {
     return (
-        <h1>This is the command bar</h1>
+        <div>
+            <SearchBar />
+            <GenerateButton />
+        </div>
     );
 }
 
