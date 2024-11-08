@@ -1,4 +1,4 @@
-export function fetchCompound(compoundName) {
+export function generateCompound(compoundName) {
     return fetch('http://localhost:5000/compoundName', {
         method: 'POST',
         headers: {
