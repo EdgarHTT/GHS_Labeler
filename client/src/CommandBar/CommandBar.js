@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SearchBar from './SearchBar/SearchBar'
 import GenerateButton from './GenerateButton/GenerateButton'
-import { fetchCompound } from './serverConnection/fetchHandler.js'
+import { fetchCompound } from './serverConnection/sendData.js'
 
 function CommandBar() {
     // State to store the search query
