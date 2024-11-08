@@ -8,7 +8,9 @@ CORS(app) #Enables CORS for all routes
 @app.route('/compoundName', methods=['POST'])
 def generationRequest():
 
-    data = request.get_json() # We get the json data from generateCompound
+    # We get the json data from generateCompound
+    data = request.get_json()
+    print(data)
 
     # Create apropiate url format for API target
     api_url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{data['compoundName']}/cids/JSON'
@@ -18,10 +20,13 @@ def generationRequest():
 
     # Handle response
     if response.status_code == 200:
-        print(response.json())
-        return(response.json())
+        
+        #Extracting CID
+        cid = response.json()
+        cid = cid['IdentifierList']['CID']
+
     else:
-        print("Compound not found or an error occurred.")
+        print("Compound not found or an error occurred.", response.status_code)
         return response.status_code
 
 if __name__ == '__main__':
