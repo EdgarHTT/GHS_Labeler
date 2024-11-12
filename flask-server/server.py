@@ -44,7 +44,29 @@ def generationRequest():
         print("Compound not found or an error occurred.", response_GHS.status_code)
         return response_GHS.status_code
     
-    app.logger.debug(response_GHS.json())
+    #app.logger.debug(response_GHS.json())
+
+    # We need to remove all the unneccesary JSON and reorder to a useful format
+    compoundContent = response_GHS.json()
+    print(compoundContent['Record'], "\n")
+    print("-"*70)
+    print(compoundContent['Record'].keys(), "\n")
+    print("-"*70)
+    
+    # Shorten the dict to facilitate address
+    shortCmpCont = compoundContent['Record']['Section'][0]['Section'][0]['Section'][0]['Information']
+    
+    for cont in shortCmpCont:
+        if cont['Name'] == "Precautionary Statement Codes":
+            print(cont['ReferenceNumber'], cont['Value']['StringWithMarkup'][0]['String'])
+        elif cont['Name'] == "Pictograms(s)":
+            print(cont['ReferenceNumber'], cont['Value']['StringWithMarkup'][0]['String'])
+        elif cont['Name'] == "GHS Hazard Statements":
+            hazards = cont['Value']['StringWithMarkup']
+            for hazard in hazards:
+                print(cont['ReferenceNumber'], hazard['String'])
+        else: print(cont, "\n")
+        
     return response_GHS.json()
     
     
