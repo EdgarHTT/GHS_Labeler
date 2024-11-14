@@ -24,10 +24,10 @@ def reformat(compoundContent):
         elif cont['Name'] == "GHS Hazard Statements":
 
             hazards = cont['Value']['StringWithMarkup']
-            compoundData[('Hstatements',f"{cont['ReferenceNumber']}")] = [item['String'] for item in hazards]
+            compoundData[('Hstatements',f"{cont['ReferenceNumber']}")] = [item['String'].split(":")[0].split(" ")[0] for item in hazards]
 
         elif cont['Name'] == "Signal":
 
-            compoundData[('Signal',f"{cont['ReferenceNumber']}")] = cont['Value']['StringWithMarkup'][0]['Markup'][0]["Extra"]
+            compoundData[('Signal',f"{cont['ReferenceNumber']}")] = cont['Value']['StringWithMarkup'][0]['Markup'][0]["Extra"].strip("GHS")
 
     return print(compoundData)
