@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from helpers import reformat, tofill
 import requests
-import helpers
 
 app = Flask(__name__)
 CORS(app) #Enables CORS for all routes
@@ -49,7 +49,8 @@ def generationRequest():
 
     # We need to remove all the unneccesary JSON and reorder to a useful format
     compoundContent = response_GHS.json()
-    helpers.reformat(compoundContent)
+    compoundData = reformat(compoundContent)
+    labelContent = tofill(compoundData, 1)
 
         
     return response_GHS.json()
