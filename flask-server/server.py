@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request, render_template
 from flask_cors import CORS
 from helpers import reformat, tofill
 import requests
@@ -48,14 +48,17 @@ def generationRequest():
     #app.logger.debug(response_GHS.json())
 
     # We need to remove all the unneccesary JSON and reorder to a useful format
-    compoundContent = response_GHS.json()
-    compoundData = reformat(compoundContent)
+    compoundData = reformat(response_GHS.json())
+
+    # data to dict for filling the label format
     labelContent = tofill(compoundData, 1)
 
         
-    return response_GHS.json()
+    return labelContent
     
-    
+@app.route('/display', methods=['GET'])
+def displayRequest():
+    return render_template("test.html")
 
 
 if __name__ == '__main__':
