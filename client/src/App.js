@@ -3,8 +3,8 @@ import './App.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import CommandBar from './CommandBar/CommandBar';
-import DisplayBar from './DisplayBar/DisplayBar';
+import CommandBar from './components/CommandBar.js';
+import DisplayBar from './components/DisplayBar.js';
 
 function App() {
   return (
