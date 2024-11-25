@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from flask_cors import CORS
 from helpers import reformat, tofill
 import requests
@@ -6,7 +6,7 @@ import requests
 app = Flask(__name__)
 CORS(app) #Enables CORS for all routes
 
-@app.route('/compoundName', methods=['POST'])
+@app.route('/fetchCompound', methods=['POST'])
 def generationRequest():
 
     # We get the json data from generateCompound
@@ -53,9 +53,10 @@ def generationRequest():
     # data to dict for filling the label format
     labelContent = tofill(compoundData, 1)
 
-        
-    return labelContent
-    
+
+    return jsonify(labelContent)
+
+
 @app.route('/display', methods=['GET'])
 def displayRequest():
     return render_template("test.html")
