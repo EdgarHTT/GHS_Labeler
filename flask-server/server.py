@@ -9,12 +9,12 @@ CORS(app) #Enables CORS for all routes
 @app.route('/fetchCompound', methods=['POST'])
 def generationRequest():
 
-    # We get the json data from generateCompound
+    # We get the json data from client query
     data = request.get_json()
     print(data)
 
     # Create apropiate url format for API target
-    api_url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{data['compoundName']}/cids/JSON'
+    api_url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{data}/cids/JSON'
     
     # Make request
     response = requests.get(api_url)
