@@ -57,6 +57,17 @@ def generationRequest():
     return jsonify(labelContent)
 
 
+@app.route('/generate', methods=['POST'])
+def generateLabel():
+    
+    data = request.get_json()
+    newkeys = ["name", "signal", "h_Stat", "p_Stat", "supp_info", "pictograms"]
+    content = {}
+    for index, oldkey in enumerate(data.keys()):
+        content[newkeys[index]] = data[oldkey]
+    print(content)
+    return request.get_json()
+
 @app.route('/display', methods=['GET'])
 def displayRequest():
     return render_template("test.html")

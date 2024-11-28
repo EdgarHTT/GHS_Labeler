@@ -63,8 +63,6 @@ def reformat(compoundContent):
 
             compoundData[('Signal',f"{cont['ReferenceNumber']}")] = cont['Value']['StringWithMarkup'][0]['Markup'][0]["Extra"].strip("GHS")
 
-    print(compoundData)
-
     return compoundData
 
 # Dictionary class
@@ -124,9 +122,9 @@ def tofill(compoundData, ref_source = 0, supplier_info = "NaN"):
     precautionary_statement = ""
     for index, Pcodes in enumerate(compoundData['Pcodes',f'{ref}']):
         
-        precautionary_statement += f"{dictionary.statement[f'{Pcodes}']}"
+        precautionary_statement += f" {dictionary.statement[f'{Pcodes}']}"
 
-    labelContent["p_Stat"] = precautionary_statement
+    labelContent["p_Stat"] = precautionary_statement.strip()
 
     # 5.- Supplier Information
     labelContent["supp_info"] = supplier_info
