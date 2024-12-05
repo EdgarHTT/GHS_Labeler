@@ -1,0 +1,42 @@
+<svg width="{{ width }}" height="{{ height }}" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g id="chem_name">
+    <rect x="0" y="0" width="{{ tbox_width }}" height="{{ tbox_height }}" fill="#000000"/>
+    <text x="50%" y="{{ font_size * 1.2 * index }}" 
+      text-anchor="middle" 
+      font-size="{{ font_size }}" 
+      alignment-baseline="hanging"
+      font-weight="bold"
+      font-family="Arial"
+      fill="#ffffff"
+      >{{ name }}
+    </text>
+  </g>
+  <text id="signal">{{ signal }}</text>
+  <g id="h_stat">
+    <rect x="0" y="0" width="{{ box_width }}" height="{{ box_height }}" fill="#000000"/>
+    {% for line, index in lines|enumerate %}
+    <text x="50%" y="{{ font_size * 1.2 * index}}" 
+      text-anchor="middle" 
+      font-size="{{ font_size }}"
+      alignment-baseline="hanging"
+      >{{ line }}
+    </text>
+    {% endfor %}
+  </g>
+  <g id="p_stat">
+    <rect x="0" y="0" width="{{ box_width }}" height="{{ box_height }}" fill="#000000"/>
+    {% for line, index in lines|enumerate %}
+    <text x="50%" y="{{ font_size * 1.2 * index}}" 
+      text-anchor="middle" 
+      font-size="{{ font_size }}"
+      alignment-baseline="hanging"
+      >{{ line }}
+    </text>
+    {% endfor %}
+  </g>
+  <text id="supp_info">{{ supp_info }}</text>
+  <g id="pictograms">
+    <rect x="0" y="0" width="{{ box_width }}" height="{{ box_height }}" fill="#000000"/>
+  </g>
+</svg>
