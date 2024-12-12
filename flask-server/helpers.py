@@ -1,4 +1,5 @@
 from io import open
+from math import sqrt
 
 def match_picto(picto_txt): # Turns text name to code name
 
@@ -135,3 +136,53 @@ def tofill(compoundData, ref_source = 0, supplier_info = "NaN"):
     print(labelContent)
 
     return labelContent
+
+""" Text Box line wrapper tools"""
+# Variables to use
+
+# SVG: width, height
+
+# Wrapping text box: box_width, box_height, font_size, text line list
+
+# Actions to do: separate input text and separate into lines of a 
+# maximum number of letters, Calculate font_size by using box_height, box_width
+# and number of lines (len(lines))
+
+# Functions: 
+# textToLines (str: text, int: box_width, num: char_limit) return (text list)
+# toBoxFormat (int: box_width, int: box_height, txtList: textToLines) return (dic: )
+
+def textToLines (box_width: int, text: str, font_size = 8) -> list:
+    """ Formats text input into a list of lines with a certain char limit"""
+    # Approximate maximum characters per line
+    max_chars = box_width // sqrt(font_size) # To get an approximate width from font_size
+    words = text.split()
+    lines, current_line = [], []
+
+    for word in words:
+        if sum(len(w) for w in current_line) + len(word) <= max_chars:
+            current_line.append(word)
+        else:
+            lines.append(" ".join(current_line))
+            current_line = [word]
+    if current_line:
+        lines.append(" ".join(current_line))
+    
+    return lines
+
+def toBoxFormat (box_width: int, box_height: int, text = "NaN") -> dict:
+    """ Generates a dict with the data needed to configure the SVG Template 
+        Requires: box_width, box_height, and text.
+    """
+    
+    area = box_width * box_height
+    font_size = area / len(text) # Assuming each word is a box
+    textList = textToLines(text, box_width, font_size)
+
+    formatValues = {}
+    formatValues["box_width"] = box_width
+    formatValues["box_height"] = box_height
+    formatValues["font_size"] = font_size
+    formatValues["textList"] = textList
+    
+    return formatValues
