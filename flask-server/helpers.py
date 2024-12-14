@@ -152,8 +152,9 @@ def tofill(compoundData, ref_source = 0, supplier_info = "NaN"):
 # textToLines (str: text, int: box_width, num: char_limit) return (text list)
 # toBoxFormat (int: box_width, int: box_height, txtList: textToLines) return (dic: )
 
-def textToLines (box_width: int, text: str, font_size = 8) -> list:
+def textToLines (box_width: float, text: str, font_size = 8.0) -> list:
     """ Formats text input into a list of lines with a certain char limit"""
+    
     # Approximate maximum characters per line
     max_chars = box_width // sqrt(font_size) # To get an approximate width from font_size
     words = text.split()
@@ -170,14 +171,14 @@ def textToLines (box_width: int, text: str, font_size = 8) -> list:
     
     return lines
 
-def toBoxFormat (box_width: int, box_height: int, text = "NaN") -> dict:
+def toBoxFormat (box_width: float, box_height: float, text = "NaN") -> dict:
     """ Generates a dict with the data needed to configure the SVG Template 
         Requires: box_width, box_height, and text.
     """
     
     area = box_width * box_height
     font_size = area / len(text) # Assuming each word is a box
-    textList = textToLines(text, box_width, font_size)
+    textList = textToLines(box_width, text, font_size)
 
     formatValues = {}
     formatValues["box_width"] = box_width

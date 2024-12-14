@@ -4,7 +4,7 @@ function DisplayBar() {
     const [content, setContent] = useState("")
 
     useEffect(() => {
-        fetch('http://localhost:5000/display')
+        fetch('http://localhost:5000/generate')
             .then(response => response.text()) // Fetch the data as raw text to render raw HTML
             .then(html => setContent(html))
     }, [])

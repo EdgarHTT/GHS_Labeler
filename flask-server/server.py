@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, jsonify
 from flask_cors import CORS
-from helpers import reformat, tofill
+from helpers import reformat, tofill, toBoxFormat
 import requests
 
 app = Flask(__name__)
@@ -57,25 +57,33 @@ def generationRequest():
     return jsonify(labelContent)
 
 
-@app.route('/generate', methods=['POST'])
+@app.route('/generate', methods=['POST', 'GET'])
 def generateLabel():
-    
-    data = request.get_json()
-    newkeys = ["name", "signal", "h_Stat", "p_Stat", "supp_info", "pictograms"]
-    content = {}
-    
-    for index, oldkey in enumerate(data.keys()):
-        content[newkeys[index]] = data[oldkey]
-    
+    if request.method == 'POST':
+        
+        data = request.get_json()
+        newkeys = ["name", "signal", "h_Stat", "p_Stat", "supp_info", "pictograms"]
+        content = {}
+        
+        for index, oldkey in enumerate(data.keys()):
+            content[newkeys[index]] = data[oldkey]
+        
 
-    print(content)
+        chem_name = toBoxFormat(33.86, 7.33, content["name"])
+        signal = toBoxFormat(33.86, 7.33, content["signal"])
+        h_stat = toBoxFormat(33.86, 7.33, content["h_Stat"])
+        p_stat = toBoxFormat(33.86, 7.33, content["p_Stat"])
+        supp_info = toBoxFormat(33.86, 7.33, content["supp_info"])
+        
+        print(chem_name)
+        print(signal)
+        print(h_stat)
+        print(p_stat)
+        return render_template("display_layout.html", opt=1, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info)
     
-    return request.get_json()
+    if request.method == 'GET':
 
-@app.route('/display', methods=['GET'])
-def displayRequest():
-    return render_template("test2.html")
-
+        return render_template("display_layout.html", opt=0)
 
 if __name__ == '__main__':
     app.run(debug=True)

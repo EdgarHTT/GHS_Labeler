@@ -1,6 +1,14 @@
 <div className="DisplayBar">
     <h1>Hola, desde el servidor</h1>
-    <main class="container">
-        {% block main %}{% endblock %}
-    </main>
+    <!DOCTYPE html>
+    <html>
+        <body>
+            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+            {% if opt == 1 %}
+                {% include "template.svg" %}
+            {% elif opt == 0 %}
+                <h1>Nothing to show yet</h1>
+            {% endif %}
+        </body>
+    </html>
 </div>
