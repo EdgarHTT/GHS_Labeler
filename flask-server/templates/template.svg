@@ -1,67 +1,83 @@
-<svg width="210mm" height="210mm" xmlns="http://www.w3.org/2000/svg">
+<svg width="170mm" height="100mm" xmlns="http://www.w3.org/2000/svg">
   <rect width="100%" height="100%" fill="#ffffff"/>
   <g id="chem_name" transform="translate(0, 15)">
-    <rect x="0%" y="0%" width="{{ chem_name.box_width }}" height="{{ chem_name.box_height }}" fill="#000000"/>
-    {% for line in lines %}
+    <rect x="0%" y="15" width="{{ chem_name.box_width * 3 }}" height="{{ chem_name.box_height * 3}}" fill="#000000"
+      stroke="#000000"
+      stroke-width="0.5"
+      stroke-opacity="1"/>
+    {% for line in chem_name.textList %}
     <text x="0%" y="{{ chem_name.font_size * 1.2 * loop.index}}" 
       text-anchor="left" 
       font-size="{{ chem_name.font_size }}"
       alignment-baseline="hanging"
       font-weight="bold"
       font-family="Arial"
-      >{{ chem_name }}
+      fill="#ffffff"
+      >{{ line }}
     </text>
     {% endfor %}
   </g>
   <g id="signal" transform="translate(0, 35)">
-    <rect x="0%" y="0%" width="{{ signal.box_width }}" height="{{ signal.box_height }}" fill="#000000"/>
-    {% for line in lines %}
+    <rect x="0%" y="35" width="{{ signal.box_width }}" height="{{ signal.box_height }}" fill="#ffffff"
+      stroke="#000000"
+      stroke-width="0.5"
+      stroke-opacity="1"/>
+    {% for line in signal.textList %}
     <text x="0%" y="{{ signal.font_size * 1.2 * loop.index}}" 
       text-anchor="left" 
       font-size="{{ signal.font_size }}"
       alignment-baseline="hanging"
       font-weight="bold"
       font-family="Arial"
-      >{{ signal.text }}
+      >{{ line }}
     </text>
     {% endfor %}
   </g>
   <g id="h_stat" transform="translate(0, 55)">
-    <rect x="0%" y="0%" width="{{ h_stat.box_width }}" height="{{ h_stat.box_height }}" fill="#000000"/>
-    {% for line in lines %}
+    <rect x="0%" y="55" width="{{ h_stat.box_width }}" height="{{ h_stat.box_height }}" fill="#ffffff"
+      stroke="#000000"
+      stroke-width="0.5"
+      stroke-opacity="1"/>
+    {% for line in h_stat.textList %}
     <text x="0%" y="{{ h_stat.font_size * 1.2 * loop.index}}" 
       text-anchor="left" 
       font-size="{{ h_stat.font_size }}"
       alignment-baseline="hanging"
       font-weight="bold"
       font-family="Arial"
-      >{{ hline }}
+      >{{ line }}
     </text>
     {% endfor %}
   </g>
   <g id="p_stat" transform="translate(0, 75)">
-    <rect x="0%" y="0%" width="{{ p_stat.box_width }}" height="{{ p_stat.box_height }}" fill="#000000"/>
-    {% for line in lines %}
+    <rect x="0%" y="75" width="{{ p_stat.box_width }}" height="{{ p_stat.box_height }}" fill="#ffffff"
+      stroke="#000000"
+      stroke-width="0.5"
+      stroke-opacity="1"/>
+    {% for line in p_stat.textList %}
     <text x="0%" y="{{ p_stat.font_size * 1.2 * loop.index}}" 
       text-anchor="left" 
       font-size="{{ p_stat.font_size }}"
       alignment-baseline="hanging"
       font-weight="bold"
       font-family="Arial"
-      >{{ pline }}
+      >{{ line }}
     </text>
     {% endfor %}
   </g>
   <g id="supp_info" transform="translate(0, 95)">
-    <rect x="0%" y="0%" width="{{ supp_info.box_width }}" height="{{ supp_info.box_height }}" fill="#000000"/>
-    {% for line in lines %}
+    <rect x="0%" y="95" width="{{ supp_info.box_width }}" height="{{ supp_info.box_height }}" fill="#ffffff"
+      stroke="#000000"
+      stroke-width="0.5"
+      stroke-opacity="1"/>
+    {% for line in supp_info.textList %}
     <text x="0%" y="{{ supp_info.font_size * 1.2 * loop.index}}" 
       text-anchor="left" 
       font-size="{{ supp_info.font_size }}"
       alignment-baseline="hanging"
       font-weight="bold"
       font-family="Arial"
-      >{{ supp_info }}
+      >{{ line }}
     </text>
     {% endfor %}
   </g>

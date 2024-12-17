@@ -166,8 +166,10 @@ def textToLines (box_width: float, text: str, font_size = 8.0) -> list:
         else:
             lines.append(" ".join(current_line))
             current_line = [word]
-    if current_line:
+    if current_line and len(current_line) != 1:
         lines.append(" ".join(current_line))
+    else:
+        lines = current_line
     
     return lines
 

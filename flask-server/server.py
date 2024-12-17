@@ -73,7 +73,7 @@ def generateLabel():
         signal = toBoxFormat(33.86, 7.33, content["signal"])
         h_stat = toBoxFormat(33.86, 7.33, content["h_Stat"])
         p_stat = toBoxFormat(33.86, 7.33, content["p_Stat"])
-        supp_info = toBoxFormat(33.86, 7.33, content["supp_info"])
+        supp_info = toBoxFormat(50, 5, content["supp_info"])
         
         print(chem_name)
         print(signal)

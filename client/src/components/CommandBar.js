@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion'
 
-function CommandBar() {
+function CommandBar({ setHtmlContent }) {
     // Compound search box
     const [query, setQuery] = useState("")
     
@@ -78,7 +78,8 @@ function CommandBar() {
             headers: { 'Content-Type': 'application/json'}
         })
         .then((response) => {
-            console.log('Response:', response.data)
+            console.log('Server response:', response.data)
+            setHtmlContent(response.data) // Lift state up
         })
         .catch((error) => {
             console.error('Error submitting data:', error)

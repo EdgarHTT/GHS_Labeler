@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 
-function DisplayBar() {
-    const [content, setContent] = useState("")
-
-    useEffect(() => {
-        fetch('http://localhost:5000/generate')
-            .then(response => response.text()) // Fetch the data as raw text to render raw HTML
-            .then(html => setContent(html))
-    }, [])
-
+function DisplayBar({ content }) {
     return (
-        <div dangerouslySetInnerHTML={{ __html: content}}></div>
+        <div> { content ? ( <div dangerouslySetInnerHTML={{ __html: content}} />
+        ) : (
+            <p>No content</p>
+        )}
+        </div>
     );
 }
 
