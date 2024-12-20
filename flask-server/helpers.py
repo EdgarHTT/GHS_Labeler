@@ -179,7 +179,7 @@ def toBoxFormat (box_width: float, box_height: float, text = "NaN") -> dict:
     """
     
     area = box_width * box_height
-    font_size = area / len(text) # Assuming each word is a box
+    font_size = area / len(text) *0.02 # Assuming each word is a box
     textList = textToLines(box_width, text, font_size)
 
     formatValues = {}

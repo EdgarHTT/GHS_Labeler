@@ -67,19 +67,23 @@ def generateLabel():
         
         for index, oldkey in enumerate(data.keys()):
             content[newkeys[index]] = data[oldkey]
-        
 
-        chem_name = toBoxFormat(33.86, 7.33, content["name"])
-        signal = toBoxFormat(33.86, 7.33, content["signal"])
-        h_stat = toBoxFormat(33.86, 7.33, content["h_Stat"])
-        p_stat = toBoxFormat(33.86, 7.33, content["p_Stat"])
-        supp_info = toBoxFormat(50, 5, content["supp_info"])
+        # Label_sizes
+        l_size = {"width":664, "height":400}
+
+        #Width and heigh of boxes obtained by multiplying the Label size with a percentage
+        
+        chem_name = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.1, content["name"])
+        signal = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.1, content["signal"])
+        h_stat = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.1, content["h_Stat"])
+        p_stat = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.1, content["p_Stat"])
+        supp_info = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.1, content["supp_info"])
         
         print(chem_name)
         print(signal)
         print(h_stat)
         print(p_stat)
-        return render_template("display_layout.html", opt=1, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info)
+        return render_template("display_layout.html", opt=1, label_size = l_size, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info)
     
     if request.method == 'GET':
 
