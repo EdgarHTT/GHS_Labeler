@@ -75,9 +75,9 @@ def generateLabel():
         
         chem_name = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.1, content["name"])
         signal = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.1, content["signal"])
-        h_stat = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.1, content["h_Stat"])
-        p_stat = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.1, content["p_Stat"])
-        supp_info = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.1, content["supp_info"])
+        h_stat = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.3, content["h_Stat"])
+        p_stat = toBoxFormat(l_size["width"]*0.5, l_size["height"]*0.4, content["p_Stat"])
+        supp_info = toBoxFormat(l_size["width"]*0.95, l_size["height"]*0.04, content["supp_info"])
         
         print(chem_name)
         print(signal)

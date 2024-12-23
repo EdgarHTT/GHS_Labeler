@@ -1,5 +1,5 @@
 from io import open
-from math import sqrt
+from math import sqrt, floor
 
 def match_picto(picto_txt): # Turns text name to code name
 
@@ -156,7 +156,7 @@ def textToLines (box_width: float, text: str, font_size = 8.0) -> list:
     """ Formats text input into a list of lines with a certain char limit"""
     
     # Approximate maximum characters per line
-    max_chars = box_width // sqrt(font_size) # To get an approximate width from font_size
+    max_chars = floor((box_width / font_size * 1.83)) # To get an approximate width from font_size
     words = text.split()
     lines, current_line = [], []
 
@@ -179,7 +179,8 @@ def toBoxFormat (box_width: float, box_height: float, text = "NaN") -> dict:
     """
     
     area = box_width * box_height
-    font_size = area / len(text) *0.02 # Assuming each word is a box
+    font_size = sqrt(area / len(text)) # Assuming each word is a box
+    font_size = max(min(font_size, box_height), 8)
     textList = textToLines(box_width, text, font_size)
 
     formatValues = {}
