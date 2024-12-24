@@ -1,9 +1,19 @@
 from flask import Flask, request, render_template, jsonify
+from jinja2 import FileSystemLoader
 from flask_cors import CORS
 from helpers import reformat, tofill, toBoxFormat
 import requests
 
 app = Flask(__name__)
+
+template_dirs = [
+    "templates",
+    "templates/labels",
+    "templates/pictograms"
+]
+
+app.jinja_loader = FileSystemLoader(template_dirs)
+
 CORS(app) #Enables CORS for all routes
 
 @app.route('/fetchCompound', methods=['POST'])
