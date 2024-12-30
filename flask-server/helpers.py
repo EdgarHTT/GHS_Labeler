@@ -180,7 +180,7 @@ def toBoxFormat (box_width: float, box_height: float, text = "NaN") -> dict:
     
     area = box_width * box_height
     font_size = sqrt(area / len(text)) # Assuming each word is a box
-    font_size = max(min(font_size, box_height), 8)
+    font_size = max(min(font_size, box_height), 8) # Ensure min font size.
     textList = textToLines(box_width, text, font_size)
 
     formatValues = {}

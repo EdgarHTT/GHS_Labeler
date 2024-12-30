@@ -6,6 +6,7 @@ import requests
 
 app = Flask(__name__)
 
+# Custom template paths
 template_dirs = [
     "templates",
     "templates/labels",
@@ -78,6 +79,10 @@ def generateLabel():
         for index, oldkey in enumerate(data.keys()):
             content[newkeys[index]] = data[oldkey]
 
+        # Adding suffixes to pictograms names
+        content["pictograms"] = content["pictograms"].split(",")
+        content["pictograms"] = [picto.strip() + ".svg" for picto in content["pictograms"]]
+
         # Label_sizes
         l_size = {"width":664, "height":400}
 
@@ -93,7 +98,8 @@ def generateLabel():
         print(signal)
         print(h_stat)
         print(p_stat)
-        return render_template("display_layout.html", opt=1, label_size = l_size, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info)
+        print(content["pictograms"])
+        return render_template("display_layout.html", opt=1, label_size = l_size, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info, pictograms=content["pictograms"])
     
     if request.method == 'GET':
 
