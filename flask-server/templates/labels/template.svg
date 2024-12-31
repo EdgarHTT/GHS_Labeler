@@ -20,14 +20,14 @@
       {% endfor %}
     </g>
   </svg>
-  <svg x="2%" y="15%">
+  <svg x="2%" y="13%">
     <g id="signal">
-      <rect x="0%" y="1.5%" width="{{ signal.box_width }}" height="{{ signal.box_height }}" fill="#ffffff"
+      <rect x="0%" y="1.5%" width="{{ signal.box_width}}" height="{{ signal.box_height }}" fill="#ffffff"
         stroke="#000000"
         stroke-width="0.5"
         stroke-opacity="0"/>
       {% for line in signal.textList %}
-      <text x="1%" y="{{ signal.font_size * loop.index}}" 
+      <text x="0%" y="{{ signal.font_size * loop.index}}" 
         text-anchor="left" 
         font-size="{{ signal.font_size }}"
         alignment-baseline="hanging"
@@ -38,14 +38,14 @@
       {% endfor %}
     </g>
   </svg>
-  <svg x="2%" y="28%">
+  <svg x="2%" y="25%">
     <g id="h_stat">
       <rect x="0%" y="0%" width="{{ h_stat.box_width }}" height="{{ h_stat.box_height }}" fill="#ffffff"
         stroke="#000000"
         stroke-width="0.5"
         stroke-opacity="0"/>
       {% for line in h_stat.textList %}
-      <text x="1%" y="{{ h_stat.font_size * loop.index}}" 
+      <text x="0%" y="{{ h_stat.font_size * loop.index}}" 
         text-anchor="left" 
         font-size="{{ h_stat.font_size }}"
         alignment-baseline="hanging"
@@ -56,14 +56,14 @@
       {% endfor %}
     </g>
   </svg>
-  <svg x="2%" y="49%">
+  <svg x="2%" y="48%">
     <g id="p_stat">
       <rect x="0%" y="0%" width="{{ p_stat.box_width }}" height="{{ p_stat.box_height }}" fill="#ffffff"
         stroke="#000000"
         stroke-width="0.5"
         stroke-opacity="0"/>
       {% for line in p_stat.textList %}
-      <text x="1%" y="{{ p_stat.font_size * loop.index * 1.2 }}" 
+      <text x="0%" y="{{ p_stat.font_size * loop.index * 1.2 }}" 
         text-anchor="left" 
         font-size="{{ p_stat.font_size }}"
         alignment-baseline="hanging"
@@ -81,7 +81,7 @@
         stroke-width="0.5"
         stroke-opacity="0"/>
       {% for line in supp_info.textList %}
-      <text x="1%" y="{{ supp_info.font_size * 1.2 * loop.index}}" 
+      <text x="0%" y="{{ supp_info.font_size * 1.2 * loop.index}}" 
         text-anchor="left" 
         font-size="{{ supp_info.font_size }}"
         alignment-baseline="hanging"
@@ -92,9 +92,57 @@
       {% endfor %}
     </g>
   </svg>
-  <svg x="50%" y="18%">
-    <g id="1 picto" transform="translate(100 0)">
-    {% include pictograms %}
-    </g>
+  <svg x="50%" y="5%">
+    {% if pictograms|length == 1 %}
+      <g id="picto1" transform="translate(85 50)">
+        {% include pictograms[0] %}
+      </g>
+    {% elif pictograms|length == 2 %}
+      <g id="picto1" transform="translate(100 -10) scale(0.8)">
+        {% include pictograms[0] %}
+      </g>
+      <g id="picto2" transform="translate(100 160) scale(0.8)">
+        {% include pictograms[1] %}
+      </g>
+    {% elif pictograms|length == 3 %}
+      <g id="picto1" transform="translate(120 50) scale(0.6)">
+        {% include pictograms[0] %}
+      </g>
+      <g id="picto2" transform="translate(55 115) scale(0.6)">
+        {% include pictograms[1] %}
+      </g>
+      <g id="picto3" transform="translate(185 115) scale(0.6)">
+        {% include pictograms[2] %}
+      </g>
+    {% elif pictograms|length == 4 %}
+      <g id="picto1" transform="translate(120 50) scale(0.6)">
+        {% include pictograms[0] %}
+      </g>
+      <g id="picto2" transform="translate(55 115) scale(0.6)">
+        {% include pictograms[1] %}
+      </g>
+      <g id="picto3" transform="translate(185 115) scale(0.6)">
+        {% include pictograms[2] %}
+      </g>
+      <g id="picto4" transform="translate(120 180) scale(0.6)">
+        {% include pictograms[3] %}
+      </g>
+    {% elif pictograms|length == 5 %}
+      <g id="picto1" transform="translate(130 20) scale(0.5)">
+        {% include pictograms[0] %}
+      </g>
+      <g id="picto2" transform="translate(75 75) scale(0.5)">
+        {% include pictograms[1] %}
+      </g>
+      <g id="picto3" transform="translate(185 75) scale(0.5)">
+        {% include pictograms[2] %}
+      </g>
+      <g id="picto4" transform="translate(130 130) scale(0.5)">
+        {% include pictograms[3] %}
+      </g>
+      <g id="picto5" transform="translate(130 235) scale(0.5)">
+        {% include pictograms[4] %}
+      </g>
+    {% endif %}
   </svg>
 </svg>
