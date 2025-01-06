@@ -1,5 +1,7 @@
 from io import open
 from math import sqrt, floor
+import xml.etree.ElementTree as ET
+from PIL import ImageFont
 
 def match_picto(picto_txt): # Turns text name to code name
 
@@ -190,3 +192,29 @@ def toBoxFormat (box_width: float, box_height: float, text = "NaN") -> dict:
     formatValues["textList"] = textList
     
     return formatValues
+
+
+def get_bounding_box(svg_file, l_dims):
+    # Font file
+    font_file = r'flask-server\resources\fonts\arial.ttf'
+
+    # SVG file parse
+    root = ET.fromstring(svg_file)
+    ns = {'svg': 'http://www.w3.org/2000/svg'}
+    
+    # Text element iteration
+    for text_elem in root.findall('.//*[@id="chem_name"]/svg:text', ns):
+        text = text_elem.text
+        x = (float(text_elem.get('x', '0').strip('%'))/100)*l_dims['width']
+        y = (float(text_elem.get('y', '0').strip('%'))/100)*l_dims['height']
+        font_size = float(text_elem.get('font-size', '16')) # Default font size
+
+        # Load the font
+        font = ImageFont.truetype(font_file, int(font_size))
+
+        # calc txt dims
+        bbox = font.getbbox(text)
+
+        # Calculate the bbox
+        #bbox = (x, y - text_height, x + text_width, y)
+        print(f"Text: {text}, Bounding Box: {bbox}")
