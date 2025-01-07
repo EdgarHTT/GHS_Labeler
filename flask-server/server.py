@@ -80,7 +80,6 @@ def generateLabel():
             content[newkeys[index]] = data[oldkey]
 
         # Adding suffixes to pictograms names
-        content["pictograms"] = content["pictograms"].split(",")
         content["pictograms"] = [picto.strip() + ".svg" for picto in content["pictograms"]]
 
         # Label_sizes
