@@ -203,10 +203,9 @@ def get_bounding_box(svg_file, l_dims):
     ns = {'svg': 'http://www.w3.org/2000/svg'}
     
     # Text element iteration
+    # Leaving it as a loop so it can be easily modified to calculate more nodes bboxes
     for text_elem in root.findall('.//*[@id="chem_name"]/svg:text', ns):
         text = text_elem.text
-        x = (float(text_elem.get('x', '0').strip('%'))/100)*l_dims['width']
-        y = (float(text_elem.get('y', '0').strip('%'))/100)*l_dims['height']
         font_size = float(text_elem.get('font-size', '16')) # Default font size
 
         # Load the font
@@ -216,5 +215,7 @@ def get_bounding_box(svg_file, l_dims):
         bbox = font.getbbox(text)
 
         # Calculate the bbox
-        #bbox = (x, y - text_height, x + text_width, y)
-        print(f"Text: {text}, Bounding Box: {bbox}")
+        bbox_dims = (bbox[2] - bbox[0], bbox[3])
+        print(f'Bounding box: {bbox_dims}')
+
+    return bbox_dims

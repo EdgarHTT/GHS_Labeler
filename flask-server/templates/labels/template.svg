@@ -2,7 +2,7 @@
   <rect width="100%" height="100%" fill="#ffffff"/>
   <svg x="2%" y="3%">
     <g id="chem_name">
-      <rect x="0%" y="0.5%" width="{{ chem_name.box_width }}" height="{{ chem_name.box_height * 1.1 }}" fill="#000000"
+      <rect x="0%" y="0.5%" width="{{ chem_name.box_width * 0.9}}" height="{{ chem_name.box_height * 1.2}}" fill="#000000"
         overflow="visible"
         stroke="#000000"
         stroke-width="0.5"

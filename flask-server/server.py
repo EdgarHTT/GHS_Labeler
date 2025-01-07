@@ -22,7 +22,7 @@ def generationRequest():
 
     # We get the json data from client query
     data = request.get_json()
-    print(data)
+    #print(data)
 
     # Create apropiate url format for API target
     api_url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{data}/cids/JSON'
@@ -80,15 +80,12 @@ def generateLabel():
             content[newkeys[index]] = data[oldkey]
 
         # Adding suffixes to pictograms names
-        content["pictograms"] = [picto.strip() + ".svg" for picto in content["pictograms"]]
-        print(content["pictograms"])
         if isinstance(content["pictograms"], list):
             content["pictograms"] = [picto + ".svg" for picto in content["pictograms"]]
         elif content["pictograms"].count(",") > 0:
             content["pictograms"] = [picto + ".svg" for picto in content["pictograms"].split(",")]
         else:
             content["pictograms"] = [content["pictograms"] + ".svg"]
-        print(len(content["pictograms"]))
 
         # Label_sizes
         l_size = {"width":664, "height":400}
@@ -109,9 +106,10 @@ def generateLabel():
         
         rendered_temp = render_template("template.svg", opt=1, label_size = l_size, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info, pictograms=content["pictograms"])
         
-        get_bounding_box(rendered_temp, l_size)
-        
-        rendered_temp = render_template("display_layout.html", opt=1, label_size = l_size, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info, pictograms=content["pictograms"])
+        bbox = get_bounding_box(rendered_temp, l_size)
+        chem_name['box_width'] = bbox[0]
+        chem_name['box_height'] = bbox[1]
+        rendered_temp = render_template("display_layout.html", opt=1, label_size = l_size, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info, pictograms=content["pictograms"], bbox = bbox)
         return rendered_temp
     
     if request.method == 'GET':
