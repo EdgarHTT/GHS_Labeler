@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, jsonify
 from jinja2 import FileSystemLoader
 from flask_cors import CORS
-from helpers import reformat, tofill, toBoxFormat
+from helpers import reformat, tofill, toBoxFormat, get_bounding_box
 import requests
 
 app = Flask(__name__)
@@ -81,6 +81,14 @@ def generateLabel():
 
         # Adding suffixes to pictograms names
         content["pictograms"] = [picto.strip() + ".svg" for picto in content["pictograms"]]
+        print(content["pictograms"])
+        if isinstance(content["pictograms"], list):
+            content["pictograms"] = [picto + ".svg" for picto in content["pictograms"]]
+        elif content["pictograms"].count(",") > 0:
+            content["pictograms"] = [picto + ".svg" for picto in content["pictograms"].split(",")]
+        else:
+            content["pictograms"] = [content["pictograms"] + ".svg"]
+        print(len(content["pictograms"]))
 
         # Label_sizes
         l_size = {"width":664, "height":400}
@@ -98,7 +106,13 @@ def generateLabel():
         print(h_stat)
         print(p_stat)
         print(content["pictograms"])
-        return render_template("display_layout.html", opt=1, label_size = l_size, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info, pictograms=content["pictograms"])
+        
+        rendered_temp = render_template("template.svg", opt=1, label_size = l_size, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info, pictograms=content["pictograms"])
+        
+        get_bounding_box(rendered_temp, l_size)
+        
+        rendered_temp = render_template("display_layout.html", opt=1, label_size = l_size, chem_name=chem_name, signal=signal, h_stat=h_stat, p_stat=p_stat, supp_info=supp_info, pictograms=content["pictograms"])
+        return rendered_temp
     
     if request.method == 'GET':
 
